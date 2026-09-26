@@ -12,27 +12,22 @@
   box-sizing: border-box;
 }
 
-html {
+html,
+body,
+#root {
   margin: 0;
+  width: 100%;
   min-width: 320px;
   min-height: 100%;
+}
+
+html,
+body {
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100%;
   background: #f6f8fc;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-#root {
-  min-height: 100vh;
-  width: 100%;
-  overflow: visible;
 }
 
 button,
@@ -54,14 +49,18 @@ input {
 }
 
 /* =========================
-   APP LAYOUT
+   APP
 ========================= */
 
 .app-shell {
   min-height: 100vh;
   width: 100%;
-  overflow: visible;
+  position: relative;
 }
+
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar {
   position: fixed;
@@ -162,16 +161,24 @@ input {
 }
 
 /* =========================
-   MAIN CONTENT
+   MAIN SCROLL CONTAINER
 ========================= */
 
 .main {
   margin-left: 245px;
+  height: 100vh;
   min-height: 100vh;
-  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
+/* =========================
+   TOP BAR
+========================= */
+
 .topbar {
+  flex: 0 0 76px;
   height: 76px;
   background: #fff;
   border-bottom: 1px solid #e4e8ef;
@@ -179,8 +186,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 10;
 }
 
@@ -203,7 +209,12 @@ input {
   display: none;
 }
 
+/* =========================
+   OFFLINE
+========================= */
+
 .offline-banner {
+  flex: 0 0 auto;
   background: #fff7df;
   border-bottom: 1px solid #f0dfaa;
   color: #805700;
@@ -216,15 +227,24 @@ input {
   margin-right: 7px;
 }
 
+/* =========================
+   CONTENT — SCROLLS
+========================= */
+
 .content {
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 32px;
-  min-height: calc(100vh - 76px);
-  overflow: visible;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 .page {
   width: min(1160px, 100%);
   margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .narrow-page {
@@ -232,7 +252,7 @@ input {
 }
 
 /* =========================
-   HERO / HEADINGS
+   HERO
 ========================= */
 
 .hero {
@@ -356,7 +376,7 @@ input {
 }
 
 /* =========================
-   STAT CARDS
+   STATS
 ========================= */
 
 .stats-grid {
@@ -518,7 +538,7 @@ input {
 }
 
 /* =========================
-   EMPTY STATES
+   EMPTY
 ========================= */
 
 .empty {
@@ -727,7 +747,7 @@ input {
 }
 
 /* =========================
-   INFO / WARNING
+   INFO
 ========================= */
 
 .tip-card,
@@ -827,7 +847,7 @@ input {
 }
 
 /* =========================
-   DANGER CARD
+   DANGER
 ========================= */
 
 .danger-card {
@@ -884,13 +904,13 @@ input {
 
 .confirm-modal {
   width: min(430px, 100%);
+  max-height: calc(100vh - 36px);
+  overflow-y: auto;
   background: #fff;
   border-radius: 18px;
   padding: 26px;
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-  max-height: calc(100vh - 36px);
-  overflow-y: auto;
 }
 
 .modal-close {
@@ -988,7 +1008,7 @@ input {
 }
 
 /* =========================
-   BOTTOM NAVIGATION
+   MOBILE NAV
 ========================= */
 
 .bottom-nav {
@@ -1006,18 +1026,18 @@ input {
 
   .main {
     margin-left: 0;
+    height: 100vh;
     min-height: 100vh;
-    overflow: visible;
   }
 
   .topbar {
+    flex: 0 0 76px;
+    height: 76px;
     padding: 0 20px;
   }
 
   .content {
     padding: 24px 20px 100px;
-    min-height: calc(100vh - 76px);
-    overflow: visible;
   }
 
   .top-logo {
@@ -1123,11 +1143,11 @@ input {
 
   .content {
     padding: 20px 14px 100px;
-    min-height: calc(100vh - 66px);
   }
 
   .topbar {
     height: 66px;
+    flex-basis: 66px;
     padding: 0 14px;
   }
 
